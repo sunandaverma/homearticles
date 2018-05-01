@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.DAO.SupplierDAO;
-import com.niit.domain.Category;
 import com.niit.domain.Supplier;
+
+
+
 
 @Controller
 public class SupplierController
@@ -26,15 +28,14 @@ SupplierDAO supplierdao;
 HttpSession session;
 
 @PostMapping("/addsupplier")
-public ModelAndView addS(@RequestParam("sid") String sid,@RequestParam("sname") String sname,@RequestParam("saddress")String saddress)
+public ModelAndView addS(@RequestParam("sid") String sid,@RequestParam("sname") String sname,@RequestParam("saddress") String saddress)
 {
 	ModelAndView mv=new ModelAndView();
 	supplier.setSid(sid);
 	supplier.setSname(sname);
-	supplier.setSaddress(saddress);	
+	supplier.setSaddress(saddress);
 	
-	
-	boolean flag=supplierdao.saveSupplier(supplier);
+	boolean flag = supplierdao.saveSupplier(supplier);
 	
 	if(flag==true)
 	{
@@ -51,28 +52,28 @@ public ModelAndView addS(@RequestParam("sid") String sid,@RequestParam("sname") 
 }
 
 @PostMapping("/updatesupplier")
-public ModelAndView udatesupp(@RequestParam("sid") String sid,@RequestParam("sname") String sname,@RequestParam("saddress") String saddress)
+public ModelAndView updateS(@RequestParam("sid") String sid,@RequestParam("sname") String sname,@RequestParam("saddress") String saddress)
 {
 	ModelAndView mv=new ModelAndView();
 	supplier.setSid(sid);
 	supplier.setSname(sname);
-	supplier.setSaddress(saddress);	
+	supplier.setSaddress(saddress);
 	
-	boolean flag=supplierdao.updateSupplier(supplier);
+	boolean flag = supplierdao.updateSupplier(supplier);
 	
-		if(flag==true)
-		{
-			mv.addObject("supplierupdatedmsg", "supplier updated successfully");
-			mv.setViewName("redirect:/managesuppliers");
-			return mv;
-		}
-		else
-		{
-			mv.addObject("supplierupdatedmsg", "supplier not updated successfully");
-			mv.setViewName("redirect:/managesuppliers");
-			return mv;
-		}
+	if(flag==true)
+	{
+		mv.addObject("supplierupdatemsg", "supplier updated successfully");
+		mv.setViewName("redirect:/managesuppliers");
+		return mv;
 	}
+	else
+	{
+		mv.addObject("supplierupdatemsg", "supplier not updated successfully");
+		mv.setViewName("redirect:/managesuppliers");
+		return mv;
+	}
+}
 
 @RequestMapping("/editsupplier")
 public ModelAndView editsupp(@RequestParam String sid)
@@ -80,8 +81,8 @@ public ModelAndView editsupp(@RequestParam String sid)
 	
 	ModelAndView mv=new ModelAndView("redirect:/managesuppliers");
 	session.setAttribute("updateclicked", true);
-	Supplier s =  supplierdao.getSupplier(sid);
-	session.setAttribute("selectedsupplier", s);
+	Supplier sup =  supplierdao.getSupplier(sid);
+	session.setAttribute("selectedsupplier", sup);
 	return mv;
 }
 
@@ -102,8 +103,6 @@ public ModelAndView deletesupp(@RequestParam String sid)
 		return mv;
 	}
 }
-	
-	
 }
 
 

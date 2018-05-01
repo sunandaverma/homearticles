@@ -4,6 +4,9 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.spi.LoggerFactoryBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,8 @@ import com.niit.domain.User;
 @Controller
 public class UserController 
 {
+	public static Logger log=LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	private UserDAO userDAO;
 	
@@ -29,10 +34,13 @@ public class UserController
 	@PostMapping("/validate")
 	public ModelAndView validate(@RequestParam("email") String email, @RequestParam("pwd") String pwd)
 	{
+		log.debug("starting validate function");
 		ModelAndView mv = new ModelAndView("Home");
-		httpSession.setAttribute("loggedIn", true);
+		httpSession.setAttribute("userloggedin", true);
 		User user = userDAO.validateUser(email, pwd);
 		String username = user.getUsername();
+		String userLoggedIn = user.getEmail();
+		httpSession.setAttribute("userLoggedIn", userLoggedIn);
 		mv.addObject("loginmessage", "welcome "+ username);
 		
 		
@@ -47,6 +55,8 @@ public class UserController
 				mv.setViewName("Home");
 				mv.addObject("carousel", true);
 			}
+			
+			log.debug("ending validate function");
 			return mv;
 		}
 	
@@ -84,7 +94,7 @@ public class UserController
 		public ModelAndView logout()
 		{
 			ModelAndView mv=new ModelAndView("redirect:/");
-			httpSession.removeAttribute("loggedIn");
+			httpSession.removeAttribute("userloggedin");
 			httpSession.removeAttribute("admin");
 			return mv;
 			

@@ -9,34 +9,35 @@
 </head>
 <body>
 
-<div class="container">      
-  <form action="addsupplier" method="post">    
-  <table class="table table-bordered">
-<br><br>
-    <tbody>
+<div class="container">
+    <form action="addsupplier" method="post">  
+  <table class="table table-hover">
+   
       <tr>
-        <td><b>Supplier ID</b></td>
-        <td><input style="width:100%;border:0;" type="text" value="${selectedsupplier.sid}" name="sid" autofocus placeholder="ID" required></td>
-      </tr>
-      <tr>
-        <td><b>Supplier Name</b></td>
-        <td><input style="width:100%;border:0;" type="text" value="${selectedsupplier.sname}" name="sname" placeholder="Name" required></td>
-      </tr>
-      <tr>
-        <td><b>Supplier Address</b></td>
-        <td><input style="width:100%;border:0;" type="text" value="${selectedsupplier.saddress}" name="saddress" placeholder="Address"></td>
+        <td> Supplier id</td>
+        <td> <input type ="text" name="sid" value="${selectedsupplier.sid}"> </td>
       </tr>
       
-      <tr>
-        <td></td>
-        <td><button type="submit" class="btn btn-primary"> ADD </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button   class="btn btn-primary  formaction="updatesupplier" method="post"> UPDATE </button></td>
+            <tr>
+        <td> Supplier name</td>
+        <td> <input type ="text" name="sname" value="${selectedsupplier.sname}"> </td>
       </tr>
-    </tbody>
+      
+            <tr>
+        <td> Supplier address</td>
+        <td> <input type ="text" name="saddress" value="${selectedsupplier.saddress}"> </td>
+      </tr>
+      
+        <tr>
+        <td></td>
+        <td> <button class="btn btn-primary" type="submit">ADD</button>
+         <button class="btn btn-primary" formaction="updatesupplier" method="post">UPDATE</button></td>
+      </tr>
   </table>
-  </form>
+  </form>  
 </div>
-<br><br>
+
+
 
 <div class="container">
  		<table class="table table-bordered" style="text-align:center;" border="3px">

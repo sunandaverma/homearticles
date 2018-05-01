@@ -2,6 +2,7 @@ package com.niit.Controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.niit.DAO.CategoryDAO;
 import com.niit.DAO.ProductDAO;
 import com.niit.DAO.SupplierDAO;
 import com.niit.domain.Category;
+import com.niit.domain.Product;
 import com.niit.domain.Supplier;
 
 @Controller
@@ -58,6 +60,9 @@ public class AdminController
 		ModelAndView mv=new ModelAndView("Home");
 		mv.addObject("manageproductsclicked",true);
 		
+		List<Product> prodlist=productdao.productList();
+		session.setAttribute("prodlist",prodlist);
+				
 		List<Category> catList =  categorydao.getCategoriesList(); //refresh the list of categories and supplier
 		session.setAttribute("catList", catList);
 		

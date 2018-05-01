@@ -1,3 +1,8 @@
 com\niit\Controller\AdminController.class
 com\niit\Controller\HomeController.class
+com\niit\Controller\SupplierController.class
+com\niit\Util\FileUtil.class
+com\niit\Controller\ProductController.class
+com\niit\Controller\CartController.class
 com\niit\Controller\UserController.class
+com\niit\Controller\CategoryController.class
